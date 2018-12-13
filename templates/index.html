@@ -2,27 +2,21 @@
 
 <html>
 
-   <body>
-   <h1>Object detection Demo</h1>
-   <br><br><br><br>
-   		  <div id = a , style="margin-top:45px;">
+	<body>
+		<h1>Knife and Gun Object Detection</h1>
+		<div id = a , style="margin-top:45px;">
 			<form action = "/" method = "POST"
-         enctype = "multipart/form-data">
-         <input type = "file" name = "file" accept="image/*" onchange="loadFile(event)"/>
-         <input type = "submit"/>
-          <br><br><br><br>
-          All data from input to output is loaded through in memory buffer <br> so it might take time <b> O(H x W x C) </b>
-          <br><br>
-          <a target="_blank" href="https://github.com/rdeepc/herokuobjectdetection">Github</a>
-			
-			<center><img id="output" align = middle STYLE="TOP:260px;WIDTH:350px; HEIGHT:350px"/></center>
-      <script>
-        var loadFile = function(event) {
-        var output = document.getElementById('output');
-        output.src = URL.createObjectURL(event.target.files[0]);
-        };
-     </script>
+			enctype = "multipart/form-data">
+				<input type = "file" name = "file" accept="image/*" onchange="loadFile(event)"/>
+				<input type = "submit"/>
+				<center><img id="output" align = middle STYLE="TOP:260px;WIDTH:350px; HEIGHT:350px"/></center>
+				<script>
+				var loadFile = function(event) {
+				var output = document.getElementById('output');
+				output.src = URL.createObjectURL(event.target.files[0]);
+				};
+				</script>
+			</form>
 		</div>
-      </form>
-   </body>
+	</body>
 </html>

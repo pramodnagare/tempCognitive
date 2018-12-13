@@ -1,20 +1,3 @@
-######## Image Object Detection Using Tensorflow-trained Classifier #########
-#
-# Author: Evan Juras
-# Date: 1/15/18
-# Description: 
-# This program uses a TensorFlow-trained classifier to perform object detection.
-# It loads the classifier uses it to perform object detection on an image.
-# It draws boxes and scores around the objects of interest in the image.
-
-## Some of the code is copied from Google's example at
-## https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb
-
-## and some is copied from Dat Tran's example at
-## https://github.com/datitran/object_detector_app/blob/master/object_detection_app.py
-
-## but I changed it to make it more understandable to me.
-
 # Import packages
 import os
 import cv2
@@ -136,17 +119,17 @@ class Detector:
 
 		class_freq = np.unique(detected_class, return_counts=True)
 		
-		with open('G:\Pramod\Cogintive\Project\Trigger\config.json','r') as f:
-			config_data = f.read()
+		#with open('G:\Pramod\Cogintive\Project\Trigger\config.json','r') as f:
+		#	config_data = f.read()
 
-		config = json.loads(config_data)
+		#config = json.loads(config_data)
 
-		access_key = config['AWS Access Keys']
-		secret_access_key = config['AWS Secret Keys']
+		#access_key = config['AWS Access Keys']
+		#secret_access_key = config['AWS Secret Keys']
 
 		session = botocore.session.get_session()
 
-		sns = session.create_client('sns', aws_access_key_id=access_key,aws_secret_access_key=secret_access_key)
+		sns = session.create_client('sns', region_name="us-east-1")
 
 		email_to = "nagare.p@husky.neu.edu"
 		email_from = "CCTV Footage"
@@ -154,7 +137,7 @@ class Detector:
 		
 		if class_freq[0].size > 0 :
 			print("Email Sent")
-			sns.publish(TopicArn=config['topicARN'],Message=Message)
+			sns.publish(TopicArn="arn:aws:sns:us-east-1:515649345368:cognitive",Message=Message)
 			
 		return img
 		
